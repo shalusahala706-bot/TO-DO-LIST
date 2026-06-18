@@ -1,0 +1,69 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.containers {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: url("https://img.freepik.com/premium-vector/network-connection-background-abstract-style_23-2148875738.jpg")
+    center/cover no-repeat;
+
+  position: relative;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.input label {
+  color: white;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.input input {
+  width: 100%;
+  padding: 12px 5px;
+
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid white;
+
+  outline: none;
+  color: white;
+  font-size: 15px;
+}
+
+.input input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.button {
+  width: 100%;
+  padding: 14px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #0c3557;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+.button:hover {
+  background: #16507f;
+  transform: translateY(-2px);
+}

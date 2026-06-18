@@ -1,0 +1,81 @@
+.containerr {
+  width: 90%;
+  max-width: 700px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+
+  background: url(https://static.vecteezy.com/system/resources/previews/025/896/293/large_2x/to-do-list-icon-with-hand-drawn-text-seamless-pattern-background-business-flat-illustration-checklist-task-list-symbol-pattern-vector.jpg)
+  center/cover no-repeat;
+  
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background:rgb(201, 170, 170);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.inpt {
+  padding: 12px;
+  border: 1px solid gray;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.inpt:focus {
+  border-color: #4f46e5;
+}
+
+.add-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4f46e5;
+  color: white;
+  font-size: 16px;
+}
+
+.add-btn:hover {
+  background-color: #3730a3;
+}
+
+.todolist {
+  margin-top: 30px;
+}
+
+.todolist h3 {
+  margin-bottom: 15px;
+}
+
+.todocard {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #f8f9fa;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+}
+
+.completed-card h4 {
+  text-decoration: line-through;
+}
+
+
+.round-checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+.todocard h4 {
+  margin: 0;
+  color:black;
+}
+
+.todocard p {
+  margin: 4px 0;
+  color: rgb(71, 62, 62);
+}
