@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
-import Todologin from "../pages/Todologin";
-import Signup from "../pages/Signup"
+import Todologin from "../pages/auth/Todologin";
+import Signup from "../pages/auth/Signup";
 import Home from "../pages/home/Home";
 
 const router = createBrowserRouter([

@@ -1,12 +1,122 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 .containerr {
   width: 90%;
   max-width: 700px;
   margin: 40px auto;
   font-family: Arial, sans-serif;
-
-  background: url(https://static.vecteezy.com/system/resources/previews/025/896/293/large_2x/to-do-list-icon-with-hand-drawn-text-seamless-pattern-background-business-flat-illustration-checklist-task-list-symbol-pattern-vector.jpg)
-  center/cover no-repeat;
+  background-color: #FFF8DC;
   
+}
+
+.list-creation {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  background-color: yellow;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.list-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid gray;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.list-input:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+.create-list-btn {
+  padding: 12px 20px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.create-list-btn:hover {
+  background-color: #3730a3;
+}
+
+.no-lists {
+  text-align: center;
+  color: #888;
+  padding: 40px 20px;
+}
+
+.lists-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.list-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 10px;
+}
+
+.list-tab-wrapper {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.list-tab {
+  padding: 10px 16px;
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.list-tab:hover {
+  background-color: #e5e7eb;
+}
+
+.list-tab.active {
+  background-color: #4f46e5;
+  color: white;
+  border-color: #4f46e5;
+}
+
+.delete-list-btn {
+  padding: 6px 10px;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.delete-list-btn:hover {
+  background-color: #dc2626;
+}
+
+.selected-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .todo-form {
@@ -50,7 +160,12 @@
   margin-bottom: 15px;
 }
 
-.todocard {
+.tasks-list {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+.tasks-list .todocard {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -58,10 +173,15 @@
   padding: 15px;
   margin-bottom: 12px;
   border-radius: 10px;
+  list-style-position: inside;
 }
 
 .completed-card h4 {
   text-decoration: line-through;
+}
+
+.task-content {
+  flex: 1;
 }
 
 
@@ -78,4 +198,79 @@
 .todocard p {
   margin: 4px 0;
   color: rgb(71, 62, 62);
+}
+
+.edit-btn {
+  padding: 8px 16px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-btn:hover {
+  background-color: #3730a3;
+}
+
+.delete-btn {
+  padding: 8px 16px;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}
+
+.edit-mode {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-left: 30px;
+}
+
+.edit-mode input,
+.edit-mode select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  flex: 1;
+  min-width: 100px;
+}
+
+.save-btn {
+  padding: 8px 16px;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.save-btn:hover {
+  background-color: #059669;
+}
+
+.cancel-btn {
+  padding: 8px 16px;
+  background-color: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancel-btn:hover {
+  background-color: #4b5563;
 }

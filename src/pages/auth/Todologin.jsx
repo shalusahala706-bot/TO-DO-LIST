@@ -1,5 +1,5 @@
 import { Formik, Field, Form } from "formik";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import "./Todologin.css";
 import * as Yup from "yup";
 
@@ -11,7 +11,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const Todologin = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className="container">
@@ -32,23 +32,20 @@ const Todologin = () => {
             const existingUsers =
               JSON.parse(localStorage.getItem("users")) || [];
 
-            const user = existingUsers.find(
-              (u) => u.email === values.email);
+            const user = existingUsers.find((u) => u.email === values.email);
 
-            if (user) {
-              alert("email doesnot exist");
-            } else if (user.password === values.password) {
-              alert("Incorrect password");
-            } else {
-              alert("Login successfull");
-              navigate("./home");
+            if (!user) {
+              alert("Email does not exist");
+              return;
             }
 
-            const updatedUsers = [...existingUsers, values];
+            if (user.password !== values.password) {
+              alert("Incorrect password");
+              return;
+            }
 
-            localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-            alert("User saved successfully");
+            alert("Login successful");
+            navigate("/home");
           }}
         >
           {({ errors, touched }) => (
@@ -79,7 +76,9 @@ const Todologin = () => {
                 ) : null}
               </div>
 
-              <button className="login-btn">Login</button>
+              <button type="submit" className="login-btn">
+                Login
+              </button>
               <div className="end">
                 <span>Don't have an account?</span>
                 <Link to="/Signup">Register</Link>
