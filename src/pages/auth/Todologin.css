@@ -87,7 +87,8 @@
   position: relative;
   z-index: 10;
 
-  width: 420px;
+  max-width: 420px;
+  width: 90%;
   margin: 80px auto;
 
   padding: 40px;
@@ -181,4 +182,65 @@
 
 .end a:hover {
   text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 20px 30px;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+
+  .login-main {
+    margin: 50px auto;
+    padding: 32px;
+    border-radius: 18px;
+  }
+
+  .login-main h1 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 14px 18px;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .login-main {
+    margin: 24px auto;
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .login-main h1 {
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+
+  .input label {
+    font-size: 13px;
+  }
+
+  .input input {
+    padding: 10px 6px;
+    font-size: 14px;
+  }
+
+  .login-btn {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .navbar ul {
+    gap: 16px;
+  }
 }
