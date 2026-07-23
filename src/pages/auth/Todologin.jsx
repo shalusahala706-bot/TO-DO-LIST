@@ -1,6 +1,7 @@
 import { Formik, Field, Form } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import "./Todologin.css";
+import { login } from "../../services/authService";
 import * as Yup from "yup";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { useState } from "react";
@@ -26,31 +27,22 @@ const Todologin = () => {
             password: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
-            const existingUsers =
-              JSON.parse(localStorage.getItem("users")) || [];
 
-            const user = existingUsers.find((u) => u.email === values.email);
-
-            if (!user) {
-              alert("Email does not exist");
-              return;
+          onSubmit={async (values) => {
+            try {
+              await login(values);
+              alert("Login successfull");
+              navigate ("/home");
+            } catch (error) {
+              alert (error.response?.data?.message ||"Login Failed")
             }
-
-            if (user.password !== values.password) {
-              alert("Incorrect password");
-              return;
-            }
-
-            alert("Login successful");
-            navigate("/home");
           }}
         >
           {({ errors, touched }) => (
             <Form>
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
-                 Email
+                  Email
                 </label>
                 <div className="input-wrapper">
                   <FiMail className="input-icon" />
