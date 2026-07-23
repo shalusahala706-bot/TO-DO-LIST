@@ -5,65 +5,181 @@
   font-family: "Poppins", sans-serif;
 }
 
-.containers {
+.signup-container {
   width: 100%;
   height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, #14b8a6 0%, #6366f1 100%);
+  padding: 20px;
+}
 
-  background: url("https://img.freepik.com/premium-vector/network-connection-background-abstract-style_23-2148875738.jpg")
-    center/cover no-repeat;
+.signup-card {
+  background: white;
+  border-radius: 24px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
 
+.signup-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 40px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.input-wrapper {
   position: relative;
-}
-
-.input {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 25px;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
 }
 
-.input label {
-  color: white;
-  margin-bottom: 8px;
-  font-size: 14px;
+.input-wrapper:focus-within {
+  background: #efefef;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.1);
+}
+
+.input-icon {
+  width: 20px;
+  height: 20px;
+  color: #8b5cf6;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.form-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 15px;
+  color: #1a1a1a;
+  font-family: "Poppins", sans-serif;
+}
+
+.form-input::placeholder {
+  color: #999;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: 8px;
+}
+
+.eye-icon {
+  width: 20px;
+  height: 20px;
+  color: #8b5cf6;
+  transition: all 0.3s ease;
+}
+
+.toggle-password:hover .eye-icon {
+  color: #7c3aed;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 6px;
   font-weight: 500;
 }
-.input input {
-  width: 100%;
-  padding: 12px 5px;
 
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid white;
-
-  outline: none;
-  color: white;
-  font-size: 15px;
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 28px 0;
 }
 
-.input input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-.button {
-  width: 100%;
-  padding: 14px;
-
-  border: none;
-  border-radius: 8px;
-
-  background: #0c3557;
-  color: white;
-
-  font-size: 16px;
-  font-weight: 600;
-
+.checkbox-input {
+  width: 20px;
+  height: 20px;
   cursor: pointer;
-  transition: 0.3s;
+  accent-color: #8b5cf6;
 }
-.button:hover {
-  background: #16507f;
+
+.checkbox-label {
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+.terms-link {
+  color: #8b5cf6;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.terms-link:hover {
+  color: #7c3aed;
+  text-decoration: underline;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.submit-button:hover {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
   transform: translateY(-2px);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.login-link-group {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.login-link {
+  color: #8b5cf6;
+  text-decoration: none;
+  font-weight: 700;
+  margin-left: 6px;
+  transition: color 0.3s ease;
+}
+
+.login-link:hover {
+  color: #7c3aed;
+  text-decoration: underline;
+}
+
+.log{
+    color: brown;
+    font-size: 14px;
+  
 }

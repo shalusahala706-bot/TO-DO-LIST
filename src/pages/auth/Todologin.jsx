@@ -2,26 +2,24 @@ import { Formik, Field, Form } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import "./Todologin.css";
 import * as Yup from "yup";
+import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
+import { useState } from "react";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().email("invalid email").required("email must be required"),
+  email: Yup.string().email("invalid email").required("email is required"),
   password: Yup.string()
-    .min(6, "password must ne atleast 6 characters")
-    .required("password mustbe requied"),
+    .min(6, "password must be at least 6 characters")
+    .required("password is required"),
 });
 
 const Todologin = () => {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="container">
-      <div className="overlay"></div>
-
-      <nav className="navbar">
-        <div className="logo">TODO</div>
-      </nav>
-
-      <div className="login-main">
+    <div className="login-container">
+      <div className="login-card">
+        <h1 className="login-title">Login</h1>
         <Formik
           initialValues={{
             email: "",
@@ -50,38 +48,63 @@ const Todologin = () => {
         >
           {({ errors, touched }) => (
             <Form>
-              <div className="input">
-                <label>Email</label>
-                <Field
-                  name="email"
-                  id="email"
-                  type="email"
-                  placeholder="Enter Email"
-                />
+              <div className="form-group">
+                <label htmlFor="email" className="form-label">
+                 Email
+                </label>
+                <div className="input-wrapper">
+                  <FiMail className="input-icon" />
+                  <Field
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    className="form-input"
+                  />
+                </div>
                 {errors.email && touched.email ? (
-                  <div>{errors.email}</div>
+                  <div className="error-message">{errors.email}</div>
                 ) : null}
               </div>
 
-              <div className="input">
-                <label>Password</label>
-                <Field
-                  name="password"
-                  type="password"
-                  id="password"
-                  placeholder="Enter Password"
-                />
+              <div className="form-group">
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
+                <div className="input-wrapper">
+                  <FiLock className="input-icon" />
+                  <Field
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    className="form-input"
+                  />
+                  <button
+                    type="button"
+                    className="toggle-password"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <FiEyeOff className="eye-icon" />
+                    ) : (
+                      <FiEye className="eye-icon" />
+                    )}
+                  </button>
+                </div>
                 {errors.password && touched.password ? (
-                  <div>{errors.password}</div>
+                  <div className="error-message">{errors.password}</div>
                 ) : null}
               </div>
 
-              <button type="submit" className="login-btn">
+              <button type="submit" className="submit-button">
                 Login
               </button>
-              <div className="end">
+              <div className="signup-link-group">
                 <span>Don't have an account?</span>
-                <Link to="/Signup">Register</Link>
+                <Link to="/signup" className="signup-link">
+                  Sign up
+                </Link>
               </div>
             </Form>
           )}
