@@ -5,6 +5,7 @@ import { login } from "../../services/authService";
 import * as Yup from "yup";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { useState } from "react";
+import { toast } from "react-toastify"; 
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("invalid email").required("email is required"),
@@ -31,11 +32,13 @@ const Todologin = () => {
           onSubmit={async (values) => {
             try {
               await login(values);
-              alert("Login successfull");
-              navigate ("/home");
+              toast.success("Login Successfull")
+              navigate("/home");
             } catch (error) {
-              alert (error.response?.data?.message ||"Login Failed")
+              console.log(error);
+              toast.error(error.message || "invalid email or password");
             }
+            
           }}
         >
           {({ errors, touched }) => (
