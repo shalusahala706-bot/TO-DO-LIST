@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../home/Home.css";
 import { Field, Formik, Form } from "formik";
+import { getTodo } from "../../services/todoService";
 
 const Home = () => {
   const [lists, setLists] = useState([]);
@@ -8,6 +9,24 @@ const Home = () => {
   const [selectedListId, setSelectedListId] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editValues, setEditValues] = useState({});
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const data = await getTodo();
+        const defaultList = {
+          id: Date.now(),
+          name: "API Todos",
+          tasks: data
+        };
+        setLists([defaultList]);
+        setSelectedListId(defaultList.id);
+      } catch (error) {
+        console.error("Error fetching todos:", error);
+      }
+    };
+    fetchTodos();
+  }, []);
 
   const addList = () => {
     if (newListName.trim()) {
@@ -46,7 +65,9 @@ const Home = () => {
       </div>
 
       {lists.length === 0 ? (
-        <p className="no-lists">No lists created yet. Create your first list!</p>
+        <p className="no-lists">
+          No lists created yet. Create your first list!
+        </p>
       ) : (
         <div className="lists-container">
           <div className="list-tabs">
@@ -62,9 +83,7 @@ const Home = () => {
                   className="delete-list-btn"
                   onClick={() => deleteList(list.id)}
                   title="Delete list"
-                >
-                  ×
-                </button>
+                ></button>
               </div>
             ))}
           </div>
@@ -92,7 +111,7 @@ const Home = () => {
                             ],
                           }
                         : list,
-                    )
+                    ),
                   );
                   resetForm();
                 }}
@@ -120,8 +139,11 @@ const Home = () => {
               </Formik>
 
               <div className="todolist">
-                <h3>List: {lists.find((l) => l.id === selectedListId)?.name}</h3>
-                {lists.find((l) => l.id === selectedListId)?.tasks.length === 0 ? (
+                <h3>
+                  List: {lists.find((l) => l.id === selectedListId)?.name}
+                </h3>
+                {lists.find((l) => l.id === selectedListId)?.tasks.length ===
+                0 ? (
                   <p>No tasks added</p>
                 ) : (
                   <ol className="tasks-list">
@@ -141,12 +163,15 @@ const Home = () => {
                                         ...list,
                                         tasks: list.tasks.map((item, i) =>
                                           i === index
-                                            ? { ...item, completed: !item.completed }
+                                            ? {
+                                                ...item,
+                                                completed: !item.completed,
+                                              }
                                             : item,
                                         ),
                                       }
                                     : list,
-                                )
+                                ),
                               );
                             }}
                           />
@@ -156,14 +181,20 @@ const Home = () => {
                                 type="text"
                                 value={editValues.task}
                                 onChange={(e) =>
-                                  setEditValues({ ...editValues, task: e.target.value })
+                                  setEditValues({
+                                    ...editValues,
+                                    task: e.target.value,
+                                  })
                                 }
                                 placeholder="Task"
                               />
                               <select
                                 value={editValues.category}
                                 onChange={(e) =>
-                                  setEditValues({ ...editValues, category: e.target.value })
+                                  setEditValues({
+                                    ...editValues,
+                                    category: e.target.value,
+                                  })
                                 }
                               >
                                 <option value="">Select category</option>
@@ -176,7 +207,10 @@ const Home = () => {
                                 type="date"
                                 value={editValues.dueDate}
                                 onChange={(e) =>
-                                  setEditValues({ ...editValues, dueDate: e.target.value })
+                                  setEditValues({
+                                    ...editValues,
+                                    dueDate: e.target.value,
+                                  })
                                 }
                               />
                               <button
@@ -192,7 +226,7 @@ const Home = () => {
                                             ),
                                           }
                                         : list,
-                                    )
+                                    ),
                                   );
                                   setEditingIndex(null);
                                 }}
@@ -230,10 +264,12 @@ const Home = () => {
                                       list.id === selectedListId
                                         ? {
                                             ...list,
-                                            tasks: list.tasks.filter((_, i) => i !== index),
+                                            tasks: list.tasks.filter(
+                                              (_, i) => i !== index,
+                                            ),
                                           }
                                         : list,
-                                    )
+                                    ),
                                   );
                                 }}
                               >
