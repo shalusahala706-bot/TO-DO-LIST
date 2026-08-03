@@ -8,6 +8,5 @@ export const signup = async (values) => {
 
 export const login = async (values) => {
   const { data } = await api.post("/login", values);
-
   return data;
 };

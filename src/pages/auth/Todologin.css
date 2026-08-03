@@ -111,7 +111,7 @@
   font-weight: 500;
 }
 
-.submit-button {
+/* .submit-button {
   width: 100%;
   padding: 14px 24px;
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
@@ -134,7 +134,7 @@
 
 .submit-button:active {
   transform: translateY(0);
-}
+} */
 
 .signup-link-group {
   text-align: center;

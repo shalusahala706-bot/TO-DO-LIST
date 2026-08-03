@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../../services/authService";
 import { FiUser, FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { useState } from "react";
+import TechBtn from "../component/Button";
 
 const validateSchema = Yup.object().shape({
   name: Yup.string().required("name is required"),
@@ -92,9 +93,11 @@ const Signup = () => {
                 ) : null}
               </div>
 
-              <button type="submit" className="submit-button">
+              <TechBtn type="submit" text="CREATE AN ACCOUNT" />
+
+              {/* <button type="submit" className="submit-button">
                 CREATE ACCOUNT
-              </button>
+              </button> */}
 
               <div className="login-link-group">
                 <span>Already have an account?</span>

@@ -134,7 +134,7 @@
   text-decoration: underline;
 }
 
-.submit-button {
+/* .submit-button {
   width: 100%;
   padding: 14px 24px;
   background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
@@ -156,7 +156,7 @@
 
 .submit-button:active {
   transform: translateY(0);
-}
+} */
 
 .login-link-group {
   text-align: center;

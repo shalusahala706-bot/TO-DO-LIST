@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import TechBtn from "../component/Button";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("invalid email").required("email is required"),
@@ -92,9 +93,8 @@ const Todologin = () => {
                 ) : null}
               </div>
 
-              <button type="submit" className="submit-button">
-                Login
-              </button>
+              <TechBtn type="submit" text="Login" />
+              
               <div className="signup-link-group">
                 <span>Don't have an account?</span>
                 <Link to="/signup" className="signup-link">
