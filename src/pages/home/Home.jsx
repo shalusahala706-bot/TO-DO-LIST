@@ -3,6 +3,11 @@ import "./Home.css";
 import { getTodo, createTodo, updateTodo } from "../../services/todoService";
 import TechBtn from "../component/Button";
 
+const palette = [
+  "#F28B82", "#FBBC04", "#FFF475", "#CCFF90",
+  "#A7FFEB", "#CBF0F8", "#D7AEFB", "#E6C9A8", "#FFFFFF"
+];
+
 const Home = () => {
   const [todos, setTodos] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -11,7 +16,9 @@ const Home = () => {
     date: "",
     category: "",
     completed: false,
+    color: "#FFFFFF",
   });
+
   const handleChange = (e) => {
     const { name, type, value, checked } = e.target;
     setFormData({
@@ -19,16 +26,11 @@ const Home = () => {
       [name]: type === "checkbox" ? checked : value,
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newTodo = {
-        title: formData.title,
-        date: formData.date,
-        category: formData.category,
-        completed: formData.completed,
-      };
-
+      const newTodo = { ...formData };
       await createTodo(newTodo);
       const { data } = await getTodo();
       setTodos(data);
@@ -40,6 +42,7 @@ const Home = () => {
       date: "",
       category: "",
       completed: false,
+      color: "#FFFFFF",
     });
     setShowForm(false);
   };
@@ -56,8 +59,28 @@ const Home = () => {
     fetchTodos();
   }, []);
 
+  const handleStatusChange = async (todo, checked) => {
+    const updated = { ...todo, completed: checked };
+    try {
+      await updateTodo(todo._id, updated);
+      setTodos(todos.map((t) => (t._id === todo._id ? updated : t)));
+    } catch (error) {
+      console.error("Error updating todo:", error);
+    }
+  };
+
+  const handleColorChange = async (todo, newColor) => {
+    const updated = { ...todo, color: newColor };
+    try {
+      await updateTodo(todo._id, updated);
+      setTodos(todos.map((t) => (t._id === todo._id ? updated : t)));
+    } catch (error) {
+      console.error("Error updating color:", error);
+    }
+  };
+
   return (
-    <div className="home-container">
+    <div className="home-container animated-bg">
       <div className="home-header">
         <h1 className="heading">TodoTask</h1>
         <div className="btn-size">
@@ -107,7 +130,11 @@ const Home = () => {
           <p>No tasks yet</p>
         ) : (
           todos.map((todo) => (
-            <div key={todo.id || todo._id} className="card">
+            <div
+              key={todo._id || todo.id}
+              className="card"
+              style={{ backgroundColor: todo.color || "#FFF" }}
+            >
               <h3>{todo.title}</h3>
               <p>{todo.description}</p>
               <p>
@@ -128,26 +155,22 @@ const Home = () => {
                 <input
                   type="checkbox"
                   checked={todo.completed}
-                  onChange={async (e) => {
-                    try {
-                      const updated = {
-                        ...todo,
-                        completed: e.target.checked,
-                      };
-                      await updateTodo(todo._id || todo.id, updated);
-
-                      setTodos(
-                        todos.map((t) =>
-                          t._id === todo._id || t.id === todo.id ? updated : t,
-                        ),
-                      );
-                    } catch (error) {
-                      console.error("Error updating todo:", error);
-                    }
-                  }}
+                  onChange={(e) => handleStatusChange(todo, e.target.checked)}
                 />{" "}
                 {todo.completed ? " Completed" : "Pending"}
               </p>
+
+              {/* 🎨 Color Palette */}
+              <div className="palette">
+                {palette.map((c, i) => (
+                  <span
+                    key={i}
+                    className={`color-dot ${todo.color === c ? "selected" : ""}`}
+                    style={{ backgroundColor: c }}
+                    onClick={() => handleColorChange(todo, c)}
+                  />
+                ))}
+              </div>
             </div>
           ))
         )}

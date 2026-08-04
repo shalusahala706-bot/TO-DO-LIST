@@ -11,6 +11,6 @@ export const createTodo = async (todo) => {
 };
 
 export const updateTodo = async (id, updatedTodo) => {
-    const { data } = await api.put('/todos/:id', updatedTodo);
+    const { data } = await api.put(`/todos/${id}`, updatedTodo);
     return data;
 }
