@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
-import { getTodo, createTodo, updateTodo } from "../../services/todoService";
+import { getTodo, createTodo, updateTodo, deleteTodo } from "../../services/todoService";
 import TechBtn from "../component/Button";
 
 const palette = [
-  "#F28B82", "#FBBC04", "#FFF475", "#CCFF90",
-  "#A7FFEB", "#CBF0F8", "#D7AEFB", "#E6C9A8", "#FFFFFF"
+  "#F28B82",
+  "#FBBC04",
+  "#FFF475",
+  "#CCFF90",
+  "#A7FFEB",
+  "#D7AEFB",
+  "#E6C9A8",
 ];
 
 const Home = () => {
   const [todos, setTodos] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [editingTodo, setEditingTodo] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
     date: "",
@@ -30,12 +36,15 @@ const Home = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newTodo = { ...formData };
-      await createTodo(newTodo);
+      if (editingTodo) {
+        await updateTodo(editingTodo._id, formData);
+      } else {
+        await createTodo(formData);
+      }
       const { data } = await getTodo();
       setTodos(data);
     } catch (error) {
-      console.error("Error creating todo:", error);
+      console.error("Error saving todo:", error);
     }
     setFormData({
       title: "",
@@ -44,6 +53,7 @@ const Home = () => {
       completed: false,
       color: "#FFFFFF",
     });
+    setEditingTodo(null);
     setShowForm(false);
   };
 
@@ -79,6 +89,20 @@ const Home = () => {
     }
   };
 
+  const handleEdit = (todo) => {
+    setEditingTodo(todo);
+    setFormData(todo);
+    setShowForm(true);
+  };
+  const handleDelete = async (id) => {
+    try {
+      await deleteTodo(id);
+      setTodos(todos.filter((todo) => todo._id !== id));
+    }catch (error){
+      console.error("Fail deleting todo:", error);
+    }
+    };
+
   return (
     <div className="home-container animated-bg">
       <div className="home-header">
@@ -87,13 +111,16 @@ const Home = () => {
           <TechBtn
             text="Create Task"
             color="green"
-            onClick={() => setShowForm(true)}
+            onClick={() => {
+              setEditingTodo(null);
+              setShowForm(true);
+            }}
           />
         </div>
         {showForm && (
           <div className="popup">
             <div className="popup-content">
-              <h2>Create Todo</h2>
+              <h2>{editingTodo ? "Edit Todo" : "Create Todo"}</h2>
               <form onSubmit={handleSubmit}>
                 <input
                   type="text"
@@ -116,8 +143,28 @@ const Home = () => {
                   value={formData.category}
                   onChange={handleChange}
                 />
+                <label>
+                  <input
+                    type="checkbox"
+                    name="completed"
+                    checked={formData.completed}
+                    onChange={handleChange}
+                  />
+                  Completed
+                </label>
                 <div className="form-actions">
-                  <button type="submit">Save</button>
+                  <button type="submit">
+                    {editingTodo ? "Update" : "Save"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowForm(false);
+                      setEditingTodo(null);
+                    }}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             </div>
@@ -160,7 +207,6 @@ const Home = () => {
                 {todo.completed ? " Completed" : "Pending"}
               </p>
 
-              {/* 🎨 Color Palette */}
               <div className="palette">
                 {palette.map((c, i) => (
                   <span
@@ -171,6 +217,13 @@ const Home = () => {
                   />
                 ))}
               </div>
+
+              <button className="edit-btn" onClick={() => handleEdit(todo)}>
+                Edit
+              </button>
+              <button className="delete-btn" onClick={() => handleDelete(todo._id)}>
+                Del
+              </button>
             </div>
           ))
         )}

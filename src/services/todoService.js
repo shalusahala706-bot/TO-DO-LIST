@@ -14,3 +14,8 @@ export const updateTodo = async (id, updatedTodo) => {
     const { data } = await api.put(`/todos/${id}`, updatedTodo);
     return data;
 }
+
+export const deleteTodo = async (id) => {
+    const {data} = await api.delete(`/todos/${id}`);
+    return data;
+}

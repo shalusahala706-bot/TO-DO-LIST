@@ -1,5 +1,5 @@
 .animated-bg {
-  background: linear-gradient(270deg, #4caf50, #2196f3, #ff5722);
+  background: linear-gradient(270deg, #93e596, #92c1e8, #ba6e57);
   background-size: 600% 600%;
   animation: gradientShift 15s ease infinite;
 }
@@ -194,4 +194,30 @@
     text-align: center;
     padding: 12px 16px;
   }
+}
+
+.edit-btn {
+  background: #2196f3;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.edit-btn:hover {
+  background: #022548;
+}
+
+.delete-btn {
+  background: #f44336;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.delete-btn:hover {
+  background: #c81c1c;
 }
